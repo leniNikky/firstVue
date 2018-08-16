@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <h1>vue.directive 自定义指令</h1>
+    <hr>
+    <div id="app">
+        <div v-leni="color" id="demo">{{count}}</div>
+        <button @click="add">add</button><br><br>
+        <button onclick='unbind()'>解绑</button>
+    </div>
+    <script>
+        // Vue.directive('leni',function(el,binding,vnode){
+        //     el.style='color:'+binding.value;
+        // });
+        function unbind(){
+            app.$destroy();
+        }
+        Vue.directive("leni",{
+            //自定义指令有五个生命周期（也叫钩子函数）
+            bind:function(el,binding,vnode){
+                el.style="color:"+binding.value;
+                console.log("1-bind")
+            },
+            inserted:function(){//绑定到节点
+                console.log("2-inserted")
+            },
+            update:function(){//组件更新
+                console.log("3-update")
+            },
+            componentUpdated:function(){//组件更新完成
+                console.log("4-componentUpdated")
+            },
+            unbind:function(){//解绑
+                console.log("5-unbind")
+            }
+            
+        })
+        
+        var app = new Vue({
+            el:"#app",
+            data:{
+                count:0,
+                color:"red",
+            },
+            methods:{
+                add:function(){
+                    this.count++;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

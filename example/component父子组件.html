@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <leni></leni>
+    </div>
+    <script>
+        //构造器外部写局部注册组件
+        //父子组件的嵌套
+        var city={
+            template:`<p>Sichuan</p>`,
+        }
+        var leni={
+            template:`<div>Panda from  <city></city>, China</div>`,
+            components:{
+                "city":city,
+            }
+           
+        }
+        var app = new Vue({
+            el:"#app",
+            data:{
+
+            },
+            components:{
+                "leni":leni
+            }
+        })
+    </script>
+</body>
+</html>
